@@ -1,18 +1,22 @@
-import {BrowserModule} from '@angular/platform-browser'
-import {NgModule} from '@angular/core'
-import {StoreModule} from '@ngrx/store'
-import {StoreDevtoolsModule} from '@ngrx/store-devtools'
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 
-import {AppRoutingModule} from './app-routing.module'
-import {AppComponent} from './app.component'
-import {AuthModule} from 'src/app/auth/auth.module'
-import {environment} from 'src/environments/environment'
-import {EffectsModule} from '@ngrx/effects'
-import {TopBarModule} from 'src/app/shared/modules/topBar/topBar.module'
-import {PersistanceService} from './shared/services/persistance.service'
-import {AuthInterceptor} from './shared/services/authinterceptor.service'
-import {GlobalFeedModule} from './globalFeed/globalFeed.module'
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AuthModule} from 'src/app/auth/auth.module';
+import {environment} from 'src/environments/environment';
+import {EffectsModule} from '@ngrx/effects';
+import {TopBarModule} from 'src/app/shared/modules/topBar/topBar.module';
+import {PersistanceService} from './shared/services/persistance.service';
+import {AuthInterceptor} from './shared/services/authinterceptor.service';
+import {YourFeedModule} from './globalFeed/yourFeed.module';
+import {GlobalFeedModule} from './globalFeed/components/global-feed/global-feed/global-feed.module';
+import {TagFeedModule} from './globalFeed/components/tag-feed/tag-feed/tag-feed.module';
+import {ArticleModule} from './shared/modules/article/article/article.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,14 +25,18 @@ import {GlobalFeedModule} from './globalFeed/globalFeed.module'
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
     TopBarModule,
-    GlobalFeedModule
+    YourFeedModule,
+    GlobalFeedModule,
+    TagFeedModule,
+    ArticleModule
   ],
   providers: [
     PersistanceService,
@@ -40,4 +48,5 @@ import {GlobalFeedModule} from './globalFeed/globalFeed.module'
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

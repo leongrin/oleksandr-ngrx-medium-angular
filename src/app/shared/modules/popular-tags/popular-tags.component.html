@@ -1,0 +1,28 @@
+<div>Popular Tags Component</div>
+
+<mc-loading *ngIf='isLoading$ | async'></mc-loading>
+
+<mc-error-message
+  [message]='error$ | async'
+  *ngIf='error$ | async'></mc-error-message>
+
+<div class='sidebar' *ngIf='popTags$ | async;else noTag'>
+  <p>Popular Tags</p>
+  <div *ngFor='let tag of popTags$ | async'
+    class='tag-list'>
+    <a
+      routerLink='/tag-feed/{{tag}}'
+      class='tag-default tag-pill'>
+      {{ tag }}
+    </a>
+  </div>
+</div>
+
+<ng-template #noTag>
+  No Tag!!!
+</ng-template>
+
+<div *ngIf='error$ | async'>
+  {{error$ | async}}
+</div>
+

@@ -1,15 +1,14 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import {Store, select} from '@ngrx/store';
-import {getFeedAction} from 'src/app/shared/modules/feed/store/actions/getFeed.action';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {select, Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {getFeedAction} from 'src/app/shared/modules/feed/store/actions/getFeed.action';
 import {GetFeedResponseInterface} from 'src/app/shared/modules/feed/types/getFeedResponse.interface';
-import {
-  feedSelector,
-  errorSelector,
-  isLoadingSelector
-} from 'src/app/shared/modules/feed/store/selectors';
+import {errorSelector, feedSelector, isLoadingSelector} from 'src/app/shared/modules/feed/store/selectors';
 import {environment} from 'src/environments/environment';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import {getPopularTagsAction} from '../../../popular-tags/store/popularTags.actions';
+
 
 @Component({
   selector: 'mc-feed',
@@ -26,6 +25,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;
+  tagTest: [];
 
   constructor(
     private store: Store,
@@ -37,7 +37,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
-    this.fetchData();
   }
 
   ngOnDestroy(): void {
@@ -47,7 +46,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
-        this.currentPage = Number(params.page || '1');
+        this.currentPage = +params.page || 1;
+        this.fetchFeed();
       }
     );
   }
@@ -57,9 +57,24 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.error$ = this.store.pipe(select(errorSelector));
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.baseUrl = this.router.url.split('?')[0];
+
+    /*this.feed$
+      .pipe(
+        filter(feed => !!feed),
+        map(feed => feed.articlesCount)
+      )
+      .subscribe((articlesCount) => {
+        console.log(`Articles count => ${articlesCount}`);
+      }
+    );*/
+
   }
 
-  fetchData(): void {
-    this.store.dispatch(getFeedAction({url: this.apiUrlProps}));
+  fetchFeed(): void {
+    const offset = this.currentPage * this.limit - this.limit;
+    const apiUrlWithParams = `${this.apiUrlProps}?offset=${offset}&page=${this.limit}`;
+    console.log(`apiUrlWithParams => ${apiUrlWithParams}`);
+    this.store.dispatch(getFeedAction({url: apiUrlWithParams}));
+    this.store.dispatch(getPopularTagsAction());
   }
 }
