@@ -10,6 +10,9 @@ import {StoreModule} from '@ngrx/store';
 import {articleReducer} from '../store/article.reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {ArticleEffects} from '../store/article.effects';
+import {LoadingModule} from '../../loading/loading.module';
+import {ErrorMessageModule} from '../../errorMessage/errorMessage.module';
+import {TagListModule} from '../../tag-list/tag-list/tag-list.module';
 
 
 const routes = [
@@ -31,7 +34,10 @@ const routes = [
     PopularTagsModule,
     FeedTogglerModule,
     StoreModule.forFeature('article', articleReducer),
-    EffectsModule.forFeature([ArticleEffects])
+    EffectsModule.forFeature([ArticleEffects]),
+    LoadingModule,
+    ErrorMessageModule,
+    TagListModule
   ]
 })
 export class ArticleModule { }

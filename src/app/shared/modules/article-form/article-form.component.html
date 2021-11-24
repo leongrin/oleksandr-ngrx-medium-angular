@@ -1,0 +1,53 @@
+<div class='editor-page'>
+  <div class='container page'>
+    <div class='row'>
+      <div class='col-md-10 offset-md-1 col-cs-12'>
+        <form [formGroup]='articleForm' (ngSubmit)='onSubmit()'>
+          <fieldset>
+            <fieldset class='form-group'>
+              <input
+                type='text'
+                class='form-control form-control-lg'
+                formControlName='title'
+                placeholder='Article Title'>
+            </fieldset>
+
+            <fieldset class='form-group'>
+              <input
+                type='text'
+                class='form-control form-control-lg'
+                formControlName='description'
+                placeholder='What is this article about?'>
+            </fieldset>
+
+            <fieldset class='form-group'>
+              <textarea
+                class='form-control form-control-lg'
+                formControlName='body'
+                rows='8'
+                placeholder='Write your article (in markdown)'>
+              </textarea>
+            </fieldset>
+
+            <fieldset class='form-group'>
+              <input
+                type='text'
+                class='form-control form-control-lg'
+                formControlName='tagList'
+                placeholder='Enter Tags'>
+            </fieldset>
+
+            <fieldset>
+              <button
+                type='submit'
+                [disabled]='articleForm.invalid || isLoading'
+                class='btn btn-primary btn-lg pull-xs-right'>
+                Publish Article
+              </button>
+            </fieldset>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

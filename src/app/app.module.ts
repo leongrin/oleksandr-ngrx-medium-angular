@@ -17,6 +17,11 @@ import {YourFeedModule} from './globalFeed/yourFeed.module';
 import {GlobalFeedModule} from './globalFeed/components/global-feed/global-feed/global-feed.module';
 import {TagFeedModule} from './globalFeed/components/tag-feed/tag-feed/tag-feed.module';
 import {ArticleModule} from './shared/modules/article/article/article.module';
+import {ArticleFormModule} from './shared/modules/article-form/article-form/article-form.module';
+import {ArticleCreateModule} from './article-create/article-create/article-create.module';
+import {ArticleEditModule} from './article-edit/article-edit/article-edit.module';
+import { FavoritesComponent } from './shared/modules/favorites/favorites.component';
+import {FavoritesModule} from './shared/modules/favorites/favorites/favorites.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +41,11 @@ import {ArticleModule} from './shared/modules/article/article/article.module';
     YourFeedModule,
     GlobalFeedModule,
     TagFeedModule,
-    ArticleModule
+    ArticleModule,
+    ArticleFormModule,
+    ArticleCreateModule,
+    ArticleEditModule,
+    FavoritesModule
   ],
   providers: [
     PersistanceService,

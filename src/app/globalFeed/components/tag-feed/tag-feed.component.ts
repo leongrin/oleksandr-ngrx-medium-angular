@@ -14,7 +14,6 @@ export class TagFeedComponent implements OnInit {
   apiUrl: string;
   tagName: string;
   limit = environment.limit;
-  secondOrBeyondRequest = false;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -26,10 +25,7 @@ export class TagFeedComponent implements OnInit {
       console.log(params.tagName);
       this.tagName = params.tagName;
       this.apiUrl = `/articles?tag=${this.tagName}`;
-      if (this.secondOrBeyondRequest) {
-        this.store.dispatch(getFeedAction({url: `${this.apiUrl}?offset=0&page=10`}));
-      }
-      this.secondOrBeyondRequest = true;
+      this.store.dispatch(getFeedAction({url: `${this.apiUrl}`}));
     });
   }
 

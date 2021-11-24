@@ -19,5 +19,10 @@ export const errorSelector = createSelector(
   (articleState: ArticleStateInterface) => articleState.error
 );
 
+export const authorArticleSelector = createSelector(
+  articleFeatureSelector,
+  (articleState: ArticleStateInterface) => articleState.data ? articleState.data.author : null
+);
+
 
 

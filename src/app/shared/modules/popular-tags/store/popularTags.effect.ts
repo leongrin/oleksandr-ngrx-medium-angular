@@ -12,7 +12,7 @@ export class PopularTagsEffect {
   popularTags$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getPopularTagsAction),
-      switchMap(() => {
+      switchMap(actionObj => {
         return this.popularTagsServ.getPopularTags().pipe(
           map((tagsData) => getPopularTagsSuccessAction({popularTags: tagsData})),
 

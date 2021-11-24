@@ -72,7 +72,10 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   fetchFeed(): void {
     const offset = this.currentPage * this.limit - this.limit;
-    const apiUrlWithParams = `${this.apiUrlProps}?offset=${offset}&page=${this.limit}`;
+    let apiUrlWithParams = this.apiUrlProps;
+    if (!this.apiUrlProps.includes('?tag')) {
+      apiUrlWithParams  = `${this.apiUrlProps}?offset=${offset}&page=${this.currentPage}}`;
+    }
     console.log(`apiUrlWithParams => ${apiUrlWithParams}`);
     this.store.dispatch(getFeedAction({url: apiUrlWithParams}));
     this.store.dispatch(getPopularTagsAction());

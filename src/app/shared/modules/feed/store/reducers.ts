@@ -3,6 +3,7 @@ import {routerNavigationAction} from '@ngrx/router-store';
 
 import {FeedStateInterface} from 'src/app/shared/modules/feed/types/feedState.interface';
 import {getFeedAction, getFeedFailureAction, getFeedSuccessAction} from 'src/app/shared/modules/feed/store/actions/getFeed.action';
+import * as ArticleActions from '../../article/store/article.actions';
 
 const initialState: FeedStateInterface = {
   data: null,

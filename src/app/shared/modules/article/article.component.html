@@ -1,1 +1,45 @@
-<p>article works!</p>
+<div class='article-page'>
+  <div class='banner'>
+    <div class='container' *ngIf='article'>
+      <h1>{{article.title}}</h1>
+      <div class='article-meta'>
+        <a routerLink='/profile/{{article.author.username}}'>
+          <img [src]='article.author.image' alt=''>
+        </a>
+        <div class='info'>
+          <a routerLink='/profile/{{article.author.username}}'>
+            {{article.author.username}}
+          </a>
+          <span class='date'>
+            {{ article.createdAt }}
+          </span>
+        </div>
+        <span *ngIf='isAuthor$ | async'>
+          <a routerLink='/article-edit/{{article.slug}}' class='btn btn-outline-secondary btn-sm'>
+            <i class='ion-edit'></i>
+            Edit Article
+          </a>
+          <button class='btn btn-outline-danger btn-sm' (click)='deleteArticle()'>
+          DELETE BUTTON
+        </button>
+        </span>
+        <mc-error-message *ngIf='error$ | async'></mc-error-message>
+      </div>
+    </div>
+  </div>
+  <div class='container page'>
+    <mc-loading *ngIf='isLoading$ | async'></mc-loading>
+    <mc-error-message *ngIf='error$ | async'></mc-error-message>
+
+    <div class='row article-content' *ngIf='article'>
+      <div class='col-xs-12'>
+        <div>
+          <p>
+            {{ article.body }}
+          </p>
+        </div>
+        <app-tag-list [tags]='article.tagList'></app-tag-list>
+      </div>
+    </div>
+  </div>
+</div>

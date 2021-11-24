@@ -14,6 +14,7 @@ import {PaginationModule} from 'src/app/shared/modules/pagination/pagination.mod
 import {TagListModule} from '../tag-list/tag-list/tag-list.module';
 import {PopularTagsModule} from '../popular-tags/popular-tags/popular-tags.module';
 import {FeedTogglerModule} from '../feed-toggler/feed-toggler/feed-toggler.module';
+import {FavoritesModule} from '../favorites/favorites/favorites.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {FeedTogglerModule} from '../feed-toggler/feed-toggler/feed-toggler.modul
     PaginationModule,
     TagListModule,
     PopularTagsModule,
-    FeedTogglerModule
+    FeedTogglerModule,
+    FavoritesModule
   ],
   declarations: [FeedComponent],
   exports: [FeedComponent],

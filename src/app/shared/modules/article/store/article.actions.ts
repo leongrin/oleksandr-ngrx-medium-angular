@@ -17,6 +17,21 @@ export const getArticleFailure = createAction(
   props<{error: string}>()
 );
 
+export const deleteArticle = createAction(
+  '[Article] Delete Article',
+  props<{slug: string}>()
+);
+
+export const deleteArticleSuccess = createAction(
+  '[Article] Delete Article Success',
+  props<{res: boolean}>()
+);
+
+export const deleteArticleFailure = createAction(
+  '[Article] Delete Article Failure',
+  props<{error: string}>()
+);
+
 
 
 

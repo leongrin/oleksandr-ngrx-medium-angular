@@ -1,0 +1,10 @@
+<div class="alert" *ngIf='error$ | async'>
+  {{error$ | async}}
+</div>
+
+<app-article-form
+  [isLoading]='isLoading$ | async'
+  (articleSubmitEvent)='onSubmit($event)'
+  [errors]='error$ | async'
+  [initialValues]='initialValues'>
+</app-article-form>

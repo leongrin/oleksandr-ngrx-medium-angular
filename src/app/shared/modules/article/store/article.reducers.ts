@@ -1,6 +1,7 @@
 import {ArticleInterface} from '../../../types/article.interface';
 import {createReducer, on} from '@ngrx/store';
 import * as ArticleActions from './article.actions';
+import {routerNavigationAction} from '@ngrx/router-store';
 
 
 export interface ArticleStateInterface {
@@ -48,4 +49,19 @@ export const articleReducer = createReducer(
       };
     }
   ),
+  on(
+    routerNavigationAction,
+    () => {
+      return initialState;
+    }
+  ),
+  on(
+    ArticleActions.deleteArticle,
+    (state, action) => {
+      return {
+        ...state,
+        data: null
+      };
+    }
+  )
 );
