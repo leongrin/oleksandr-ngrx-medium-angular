@@ -4,7 +4,6 @@ import * as ArticleEditActions from './articleEdit.actions';
 import {ArticleService} from '../../shared/services/article.service';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import * as ArticleCreateActions from '../../article-create/store/articleCreate.actions';
 import {Router} from '@angular/router';
 
 
@@ -15,11 +14,12 @@ export class ArticleEditEffects {
     this.actions$.pipe(
       ofType(ArticleEditActions.editArticle),
       switchMap(actionData =>
-        this.articleServ.updateArticle(actionData.article, actionData.slug).pipe(
-          map(article => ArticleEditActions.editArticleSuccess({article})),
+        this.articleServ.updateArticle(actionData.article, actionData.slug)
+          .pipe(
+            map(article => ArticleEditActions.editArticleSuccess({article})),
 
-          catchError(err => of(ArticleEditActions.editArticleFailure(err.message || err.message.message)))
-        )
+            catchError(err => of(ArticleEditActions.editArticleFailure(err.message || err.message.message)))
+          )
       )
     )
   );

@@ -12,6 +12,7 @@ import {LoginRequestInterface} from 'src/app/auth/types/loginRequest.interface';
 import {loginAction} from 'src/app/auth/store/actions/login.action';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'mc-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
